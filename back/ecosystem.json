@@ -1,0 +1,50 @@
+{
+    "apps": [
+        {
+            "name": "one_app",
+            "script": "dist/app.js",
+            "autorestart": true,
+            "watch": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "WEB",
+            "script": "web.js"
+        }
+    ],
+    "deploy": {
+        "production": {
+            "user": "ubuntu",
+            "host": "ec2-18-221-95-85.us-east-2.compute.amazonaws.com",
+            "pre-setup": "apt-get install git; git reset --hard",
+            "post-setup": "ls -la",
+            "key": "~/.ssh/node_aws.pem",
+            "ref": "origin/test_task",
+            "repo": "git@github.com:BeLPHeX/node_starter.git",
+            "path": "/home/ubuntu/server",
+            "post-deploy": "npm install && pm2 startOrRestart ecosystem.config.js",
+            "env": {
+                "NODE_ENV": "production"
+            }
+        },
+        "dev": {
+            "user": "ubuntu",
+            "host": "ec2-18-221-95-85.us-east-2.compute.amazonaws.com",
+            "pre-setup": "sudo apt-get install git",
+            "post-setup": "ls -la",
+            "key": "~/.ssh/node_aws.pem",
+            "ref": "origin/test_task",
+            "repo": "git@github.com:BeLPHeX/node_starter.git",
+            "path": "/home/ubuntu/server",
+            "post-deploy": "npm install && pm2 startOrRestart ecosystem.config.js",
+            "env": {
+                "NODE_ENV": "dev"
+            }
+        }
+    }
+}
