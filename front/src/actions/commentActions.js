@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true;
 const port = 5000;
 const location = {
   protocol: "http:",
-  hostname: "ec2-18-221-95-85.us-east-2.compute.amazonaws.com"
+  hostname: "ec2-3-135-205-96.us-east-2.compute.amazonaws.com"
 }
 axios.defaults.baseURL = location.protocol + '//' + location.hostname + ':' + port;
 
